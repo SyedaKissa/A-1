@@ -6,7 +6,7 @@
 
 #include<readline/history.h> // to use function add_history
 
-void atstart() {
+void at_start() {
 	system("clear"); 
 	printf(" \n \n ************* Kissa's Shell *************\n \n");
     sleep(2);
@@ -40,13 +40,14 @@ int take_input(char* input){
 	}
 	printf("Buffer : %s\n", input_buffer);
 
-	// Add the input value into history
+	
 	if (strlen(input_buffer) != 0){ //Buffer contains an input
-		add_history(input_buffer);
+
+		add_history(input_buffer); // Add the input value into history
 		strcpy(input,input_buffer);// Now input will point to input_buffer[0]
 		return 1;
 	}
-	else{ // Got no input 
+	else{ // Got no proper input 
 		return 0;
 	}
 }
@@ -57,16 +58,26 @@ void loop(){
 
 		type_prompt();
 
-	    take_input(input_buffer);
+		char* input; // stores the input typed by the user 
+
+		// Taking the right input
+		int j;
+		while (1){
+			j = take_input(input);
+			if (j == 1){
+				printf("j = 1\n");
+				break;
+			}			
+		}
 
 		
-
-	}
+		
+	}// end of outer most while(1)
 }
 
 int main()
 {
-    atstart();
+    at_start();
     loop();
 	return 0;
 }
